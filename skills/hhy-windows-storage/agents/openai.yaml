@@ -1,0 +1,3 @@
+interface:
+  display_name: "Windows存储维护"
+  short_description: "按批准范围检查、清理和迁移Windows数据，逐项验证内容与保存位置"

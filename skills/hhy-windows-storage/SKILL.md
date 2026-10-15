@@ -1,0 +1,41 @@
+---
+name: hhy-windows-storage
+description: Inspect Windows disk usage and carry out explicitly authorized cleanup, verified file migration or storage-path changes while preserving user data. Use for storage inspection, cleanup and migration requests; a simple disk-concept question needs only an explanation, and analysis-only requests must not mutate data or configuration.
+---
+
+# Windows存储维护
+
+在具体任务中检查占用、清理已批准目标、校验迁移和保存位置。本技能本身不是删除授权，不创建定时清理任务。
+
+## 盘点与授权
+
+- “看看、分析、给建议”只读。先测当前磁盘余量，再分层检查相关大目录，不先递归扫描整盘；按实际内容区分日志/缓存/安装包与文件、项目、聊天、备份、虚拟磁盘和系统文件。
+- 默认保留用户文件与证据、聊天数据库、备份、开发/代理配置、Codex/Cursor历史、Docker/WSL数据及分页/休眠文件。目录大或很久没用不能单独证明可以删。
+- 提议操作时列出实际绝对目标、占用、程序状态、影响及恢复边界；按当次批准的范围执行，同范围不重复问，旧任务授权不沿用到新任务。全局路径/日志设置与退出应用需相应授权；当前应用的原生迁移属于批准范围时可以正常进行。
+- 如果只是“C盘和D盘有什么区别”，直接解释，不扫描或改动电脑。
+
+## 根据对象选择方法
+
+阅读 [迁移和设置核验](references/migration.md) 的相关部分。
+
+- 缓存/旧日志：只处理批准的明确叶目录或文件，保留正在写入的日志；优先官方清理方式。不强删锁定文件，不反复追删再生成的缓存。
+- 普通静态文件：先复制、核对清单与内容，再检查源仍与清单一致；只有完整核验和批准均满足后才移除源。目标同名不同内容、断链、重解析点、源变化或容量不足时停止对应项，不覆盖冲突。
+- 聊天或应用数据库：优先内置迁移，不按普通静态文件流程搬运行中的数据库。原生操作完成后检查新位置、旧位置、样本及应用状态；无法验证的内容明确写出。
+- 下载/备份/日志配置：记录原值与版本，使用官方界面或已验证的受支持接口。只有已获批准且作用已查清时修改必要字段，不顺带改规则、网络或其他配置。配置字段的数字含义按本机版本核实。
+
+## 只读文件核验工具
+
+`scripts/verify_migration.py` 仅生成清单和核对内容，不复制、删除文件，也不改系统设置；适用于普通静态目录，不适用于运行中的应用数据库。
+
+```text
+python scripts/verify_migration.py snapshot <source> <manifest-outside-source.json>
+python scripts/verify_migration.py verify <manifest.json> <destination> <report-outside-destination.json> --check-source
+```
+
+清单不完整、预期文件/空目录缺失、内容不同、源变化或链接风险会报告失败。额外文件默认阻止通过；如果确需允许额外文件，应先确认其合理性，再显式使用`--allow-extra`，差异仍记录。报告失败即停止相关删除。清单和报告可能包含本机路径，不作为公开仓库内容上传。
+
+## 分开验证与交付
+
+区分“文件已迁移”“设置已保存并读回”“应用实际把新数据写到新位置”。Windows默认下载位置不证明所有软件独立路径已改；启动时清理不证明持续容量限制。不可为验证而擅自重启代理或强制关闭正在工作的应用。
+
+最后实测余量，核验批准目标与受保护对象，记录差异、锁定/跳过项、实际应用验证范围和恢复依据。迁移只重新分配盘间占用；空闲变化也受后台写入影响。达到本次维护目标后停止扩大删除范围，不保证未来永不占满。
