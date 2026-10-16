@@ -1,6 +1,6 @@
 ---
 name: hhy-windows-storage
-description: Inspect Windows disk usage and carry out explicitly authorized cleanup, verified file migration or storage-path changes while preserving user data. Use for storage inspection, cleanup and migration requests; a simple disk-concept question needs only an explanation, and analysis-only requests must not mutate data or configuration.
+description: Use when inspecting Windows disk usage or carrying out authorized cleanup, file migration, or storage-path changes. Keep advice-only requests read-only.
 ---
 
 # Windows存储维护
@@ -10,13 +10,13 @@ description: Inspect Windows disk usage and carry out explicitly authorized clea
 ## 盘点与授权
 
 - “看看、分析、给建议”只读。先测当前磁盘余量，再分层检查相关大目录，不先递归扫描整盘；按实际内容区分日志/缓存/安装包与文件、项目、聊天、备份、虚拟磁盘和系统文件。
-- 默认保留用户文件与证据、聊天数据库、备份、开发/代理配置、Codex/Cursor历史、Docker/WSL数据及分页/休眠文件。目录大或很久没用不能单独证明可以删。
+- 默认保留用户文件与证据、聊天数据库、备份、开发/代理配置、Codex/Cursor历史、Docker/WSL数据及分页/休眠文件。目录大或很久没用不能单独证明可以删。复杂盘点按实际内容分出“可再生候选、需本人判断、保持保护”三类，优先处理收益明确、恢复成本低的已批准项；分类本身不授予删除权限。
 - 提议操作时列出实际绝对目标、占用、程序状态、影响及恢复边界；按当次批准的范围执行，同范围不重复问，旧任务授权不沿用到新任务。全局路径/日志设置与退出应用需相应授权；当前应用的原生迁移属于批准范围时可以正常进行。
 - 如果只是“C盘和D盘有什么区别”，直接解释，不扫描或改动电脑。
 
 ## 根据对象选择方法
 
-阅读 [迁移和设置核验](references/migration.md) 的相关部分。
+阅读 [迁移和设置核验](references/migration.md) 的相关部分；批量整理或中断后续作时，按其中的路径记录和恢复规则处理。
 
 - 缓存/旧日志：只处理批准的明确叶目录或文件，保留正在写入的日志；优先官方清理方式。不强删锁定文件，不反复追删再生成的缓存。
 - 普通静态文件：先复制、核对清单与内容，再检查源仍与清单一致；只有完整核验和批准均满足后才移除源。目标同名不同内容、断链、重解析点、源变化或容量不足时停止对应项，不覆盖冲突。

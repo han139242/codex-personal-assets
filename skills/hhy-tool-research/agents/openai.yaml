@@ -1,0 +1,4 @@
+interface:
+  display_name: "工具调研与采用判断"
+  short_description: "按实际场景核对工具能力、来源与环境，比较替代方案并小步验证可复用方法"
+  default_prompt: "使用 $hhy-tool-research 调研这个工具，结合我的现有环境判断值得采用哪些部分，并给出直接证据。"
