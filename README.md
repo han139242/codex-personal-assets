@@ -2,6 +2,17 @@
 
 整理可复用的工作规范与个人技能，保留具体流程及验证方法。公开内容不包含个人材料、聊天记录、账户配置或访问凭据。
 
+## 从实际问题进入
+
+| 任务 | 推荐先看 |
+| --- | --- |
+| 想把 Codex 用于日常项目协作 | [工作约定示例](AGENTS.md)，包含沟通、授权范围和验收方式 |
+| Windows 迁移后想确认两边文件一致 | [只读迁移核验工具](skills/hhy-windows-storage/scripts/verify_migration.py)与[迁移指南](skills/hhy-windows-storage/references/migration.md) |
+| 要判断一个开源工具或现有 Skill 值不值得用 | [工具调研与采用判断](skills/hhy-tool-research/SKILL.md)，沿实际任务核对来源、成本和环境 |
+| 找课业辅导或课程交付新版本 | [Codex 学习与课程交付](https://github.com/han139242/codex-learning-skills)，学习辅导与课程交付可分别安装 |
+
+仓库内的课程交付入口保留供参考。开始安装前可先确认当前机器上的同名技能版本。
+
 ## 内容
 
 | 资产 | 用途 |
